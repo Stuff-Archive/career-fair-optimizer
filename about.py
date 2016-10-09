@@ -1,14 +1,8 @@
 # Fileswitcher for testing
-import os
-import os.path as op
-import argparse
-from bs4 import BeautifulSoup
-from subprocess import Popen
 import requests
 import json
-from readability import Document
-import sys
-
+import pprint
+from details.models import details
 
 api_prefix = "http://api.glassdoor.com/api/api.htm?"
 
@@ -21,38 +15,34 @@ def api_request_generate(params):
     return prefix[:-1]
 
 
-
-def main():
+def getCompanyList():
 
     prams = {"v":1, "format":'json', "t.p": 99384, "t.k":"bvReWCBITHk", "userip":"0.0.0.0", "useragent":"Mozilla/%2F4.0", "action":"employers"}
-
     url = api_request_generate(prams)
-
     user_agent = {'User-agent': 'Mozilla/5.0'} #useragent workaroudn
 
+    r = requests.get(url, headers=user_agent)
+    json_data = json.loads(r.text)
 
-    "?v=1&format=json&t.p=120&t.k=fz6JLNDfgVs&action=employers&q=pharmaceuticals&userip=192.168.43.42&useragent=Mozilla/%2F4.0"
+    pp = pprint.PrettyPrinter(indent=4)
+    theList = [x['name'] for x in json_data['response']['employers']]
+
+    for c in theList:
+        details.objects.get_or_create(company_name = c)
 
 
-    #parser = argparse.ArgumentParser(description='Switch the appropriate file for testing via symbolic link.')
-    #parser.add_argument('integers', type=int, nargs=1, help='index of file to switch')
+def getCompanyInfo(nameOfCompany):
+    prams = {"v":1, "format":'json', "t.p": 99384, "t.k":"bvReWCBITHk", "userip":"0.0.0.0", "useragent":"Mozilla/%2F4.0", "action":"employers"}
+    url = api_request_generate(prams)
+    user_agent = {'User-agent': 'Mozilla/5.0'} #useragent workaroudn
 
     r = requests.get(url, headers=user_agent)
+    json_data = json.loads(r.text)
 
-    #doctest = Document(r.text)
-    #soup = BeautifulSoup(r.text, "html.parser")
+    pp = pprint.PrettyPrinter(indent=4)
+    theList = [x['name'] for x in json_data['response']['employers']]
 
-
-    #print(r.text)
-
-    decoder = json.JSONDecoder()
-    arr = decoder.decode(r.text)
-    for x in arr:
-        print(x)
-    #print(doctest.title())
-    #print(html)
-
-
+    return theList
 
 if __name__ == '__main__':
-    main()
+    getCompanyInfo()
