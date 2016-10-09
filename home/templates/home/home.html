@@ -1,16 +1,21 @@
-<!DOCTYPE html>
-
+{% extends "cfo/index.html" %}
 {% load staticfiles %}
+{% block body %}
+		<div id="fh5co-main">
 
-<html>
-	
-	<head>
-		<title>Rango</title>
-	</head>
-<body>
-
+			<div class="fh5co-narrow-content">
+				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">We Love To Design <span>See Our Portfolio</span></h2>
 {% for company in recruiters %}
-	<h1> POW {{company.company_name}} </h1>
+				<div class="row animate-box" data-animate-effect="fadeInLeft">
+					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
+						<a href="work.html">
+							<img src="images/work_1.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+							<h3 class="fh5co-work-title">{{company.company_name}}</h3>
+							<p>Illustration, Branding</p>
+						</a>
+					</div>
+				</div>
 {% endfor %}
-</body>
-</html>
+			</div>
+		</div>
+{% endblock %}
