@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+	
+	<head>
+		<title>Rango</title>
+	</head>
+<body>
+
+{% for company in recruiters %}
+	<h1> POW {{company.company_name}} </h1>
+{% endfor %}
+</body>
+</html>
