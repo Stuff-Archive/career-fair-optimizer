@@ -29,6 +29,7 @@ def getCompanyList():
 
     for c in theList:
         details.objects.get_or_create(company_name = c)
+    return theList
 
 
 def getCompanyInfo(nameOfCompany):
