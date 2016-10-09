@@ -1,12 +1,6 @@
 # Fileswitcher for testing
-import os
-import os.path as op
-import argparse
-from bs4 import BeautifulSoup
-from subprocess import Popen
 import requests
 import json
-import sys
 import pprint
 from details.models import details
 
@@ -19,6 +13,7 @@ def api_request_generate(params):
 
     print(prefix[:-1])
     return prefix[:-1]
+
 
 def getCompanyList():
 
