@@ -7,7 +7,7 @@ class details(models.Model):
     upvotes = models.IntegerField (default = 0)
     downvotes = models.IntegerField (default = 0)
     def __unicode__(self):
-        return self.name
+        return self.company_name
 
 class swag(models.Model):
     company = models.ForeignKey(details, on_delete=models.CASCADE)
