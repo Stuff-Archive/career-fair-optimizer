@@ -1,3 +1,4 @@
 Django==1.10.2
 selenium==2.53.6
 BeautifulSoup(bs4)==4
+readability_lxml
