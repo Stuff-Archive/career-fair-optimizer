@@ -3,3 +3,5 @@ bs4==0.0.1
 Django==1.10.2
 requests==2.11.1
 selenium==2.53.6
+BeautifulSoup(bs4)==4
+readability_lxml
